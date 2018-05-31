@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">OurApp</string>
+    <string name="title_activity_main2__drawer">Наше первое приложение</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Имя</string>
+    <string name="nav_header_subtitle">Фамилия</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
