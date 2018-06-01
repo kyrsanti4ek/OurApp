@@ -1,5 +1,6 @@
 package com.example.user.ourapp;
 
+import android.content.ContentProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +20,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,6 +35,11 @@ public class Main2Activity_Drawer extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
+    private ImageView imageView;
+    private TextView name;
+    private NavigationView navigationView;
+//    private C navHeader;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +47,10 @@ public class Main2Activity_Drawer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+//        navigationView = (NavigationView) findViewById(R.id.nav_view);
+//
+//        imageView = (ImageView) navigationView.findViewById(R.id.iconAcc);
+//        name = (TextView) navigationView.findViewById(R.id.nameAcc);
 
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
@@ -51,7 +62,11 @@ public class Main2Activity_Drawer extends AppCompatActivity
             String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
             Log.d(TAG, "name: " + personName + "; surname: " + personFamilyName + "; icon: " + personPhoto);
+
+//            imageView.setImageURI(personPhoto);
+//            name.setText(personName);
         }
+
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
