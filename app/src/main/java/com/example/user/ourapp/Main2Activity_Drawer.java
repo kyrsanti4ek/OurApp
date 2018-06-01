@@ -41,6 +41,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
 
 
+
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             String personName = acct.getDisplayName();
@@ -74,6 +75,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -123,16 +125,23 @@ public class Main2Activity_Drawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.g_map) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_camera) {
 
 
         } else if (id == R.id.nav_slideshow) {
 
+
+        } else if (id == R.id.nav_quotes) {
+
+
+        } else if (id == R.id.nav_log_out) {
+
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_send) {
+
 
             mAuth.signOut();
 

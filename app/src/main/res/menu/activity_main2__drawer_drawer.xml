@@ -5,8 +5,8 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:id="@+id/g_map"
+            android:icon="@drawable/ic_location_on_black_24dp"
             android:title="G map" />
 
        <item
@@ -17,23 +17,23 @@
 
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_public_black_24dp"
             android:title="Currency/Weather/Bitcoin" />
 
 
 
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_quotes"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Quotes" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="">
         <menu>
 
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_keyboard_backspace_black_24dp"
                 android:title="Log Out" />
         </menu>
     </item>
