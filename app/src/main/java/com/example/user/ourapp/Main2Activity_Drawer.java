@@ -157,15 +157,6 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         } else if (id == R.id.nav_log_out) {
 
-        } else if (id == R.id.nav_manage) {
-
-
-        } else if (id == R.id.nav_quotes) {
-
-
-        } else if (id == R.id.nav_log_out) {
-
-
             mAuth.signOut();
 
         }
