@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -25,10 +26,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.SignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 public class Main2Activity_Drawer extends AppCompatActivity
@@ -101,8 +111,16 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
 //            imageView.setImageURI(personPhoto);
             name.setText(personName);
-            imageView.setImageURI(personPhoto);
+            Picasso.get()
+                    .load(personPhoto)
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(imageView);
         }
+
+
+
+
     }
 
     @Override
@@ -158,6 +176,8 @@ public class Main2Activity_Drawer extends AppCompatActivity
         } else if (id == R.id.nav_log_out) {
 
             mAuth.signOut();
+
+            LoginManager.getInstance().logOut();
 
         }
 
