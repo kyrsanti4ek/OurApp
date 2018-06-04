@@ -74,6 +74,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         };
 
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -150,10 +151,20 @@ public class Main2Activity_Drawer extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
 
+
         } else if (id == R.id.nav_quotes) {
 
 
         } else if (id == R.id.nav_log_out) {
+
+        } else if (id == R.id.nav_manage) {
+
+
+        } else if (id == R.id.nav_quotes) {
+
+
+        } else if (id == R.id.nav_log_out) {
+
 
             mAuth.signOut();
 
