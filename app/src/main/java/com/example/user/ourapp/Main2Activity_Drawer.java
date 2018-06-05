@@ -1,6 +1,8 @@
 package com.example.user.ourapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +27,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "myLogs";
@@ -42,6 +47,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
 
 
+
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             String personName = acct.getDisplayName();
@@ -52,6 +58,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
             Uri personPhoto = acct.getPhotoUrl();
             Log.d(TAG, "name: " + personName + "; surname: " + personFamilyName + "; icon: " + personPhoto);
         }
+
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -76,6 +83,23 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        View headerView = navigationView.getHeaderView(0);
+        name = (TextView) headerView.findViewById(R.id.nameAcc);
+        imageView = (ImageView) headerView.findViewById(R.id.iconAcc);
+
+        String personName = getIntent().getExtras().getString("name");
+
+        String personPhoto = getIntent().getExtras().getString("icon");
+        Log.d("PersonPhotoString",personPhoto);
+        name.setText(personName);
+            Picasso.get()
+                    .load(Uri.parse(personPhoto))
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(imageView);
+
     }
 
     @Override
@@ -117,7 +141,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.g_map) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_camera) {
 
 

@@ -75,11 +75,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-//        list.add("sss");
-
-         Log.d("FBTAG", list.toString() );
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -89,17 +84,19 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
-                GraphRequest request = GraphRequest.newMeRequest(
-                        loginResult.getAccessToken(),
-                        new GraphRequest.GraphJSONObjectCallback() {
-                            @Override
-                            public void onCompleted(JSONObject object, GraphResponse response) {
-                                startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
-                                try {
-                                    Log.d("CompletedTag", response.getJSONObject().getString("id"));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                handleFacebookAccessToken(loginResult.getAccessToken());
+                Log.d(TAG, "facebook:onSuccess:" + loginResult);
+//                GraphRequest request = GraphRequest.newMeRequest(
+//                        loginResult.getAccessToken(),
+//                        new GraphRequest.GraphJSONObjectCallback() {
+//                            @Override
+//                            public void onCompleted(JSONObject object, GraphResponse response) {
+//                                startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+//                                try {
+//                                    Log.d("CompletedTag", response.getJSONObject().getString("id"));
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
 
 
 
@@ -114,15 +111,15 @@ public class LoginActivity extends AppCompatActivity {
 //                                } catch (JSONException e) {
 //                                    e.printStackTrace();
 //                                }
-                            }
-                        });
-                Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday");
-                request.setParameters(parameters);
-                request.executeAsync();
+//                            }
+//                        });
+//                Bundle parameters = new Bundle();
+//                parameters.putString("fields", "id,name,email,gender,birthday");
+//                request.setParameters(parameters);
+//                request.executeAsync();
 
-                Profile profile = Profile.getCurrentProfile();
-                Log.d("FBTAG", String.valueOf(parameters));
+//                Profile profile = Profile.getCurrentProfile();
+//                Log.d("FBTAG", String.valueOf(parameters));
 
 
             }
@@ -145,7 +142,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (firebaseAuth.getCurrentUser() != null) {
 
-                    startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+                    Log.d("blabla",String.valueOf(firebaseAuth.getCurrentUser().getDisplayName()));
+                    Log.d("blabla",String.valueOf(firebaseAuth.getCurrentUser().getPhotoUrl()));
+
+
+
+                    Intent intent = new Intent(LoginActivity.this, Main2Activity_Drawer.class);
+                    intent.putExtra("name", firebaseAuth.getCurrentUser().getDisplayName());
+                    intent.putExtra("icon", String.valueOf(firebaseAuth.getCurrentUser().getPhotoUrl()));
+                    startActivity(intent);
+
 
                 }
 
@@ -212,7 +218,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        boolean s = callbackManager.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, String.valueOf(s));
 
 
         //Result returned from launching the Intent from GoogleSingInApi.getSignInIntent(...);
@@ -228,9 +235,10 @@ public class LoginActivity extends AppCompatActivity {
                 // ...
             }
         }else {
-            startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+//            startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
 
         }
+
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
@@ -269,7 +277,11 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Log.d("userdata", String.valueOf(user));
                             updateUI(user);
+
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
