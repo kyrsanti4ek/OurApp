@@ -152,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("icon", String.valueOf(firebaseAuth.getCurrentUser().getPhotoUrl()));
                     startActivity(intent);
 
+
                 }
 
             }
