@@ -37,10 +37,9 @@
         <activity
             android:name=".Main2Activity_Drawer"
             android:label="@string/title_activity_main2__drawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
 
-    <meta-data android:name="com.facebook.sdk.ApplicationId"
-        android:value="@string/facebook_app_id"/>
     <meta-data android:name="com.facebook.sdk.ApplicationId"
         android:value="@string/facebook_app_id"/>
 

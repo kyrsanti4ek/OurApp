@@ -162,7 +162,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.g_map) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_camera) {
 
 
