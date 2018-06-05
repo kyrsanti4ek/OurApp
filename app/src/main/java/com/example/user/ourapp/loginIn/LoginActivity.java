@@ -2,6 +2,8 @@ package com.example.user.ourapp.loginIn;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +16,15 @@ import android.widget.Toast;
 
 import com.example.user.ourapp.Main2Activity_Drawer;
 import com.example.user.ourapp.R;
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -27,9 +38,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,11 +66,77 @@ public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "FBTAG";
 // ...
 
+    CallbackManager callbackManager;
+
+    LoginButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+//        list.add("sss");
+
+         Log.d("FBTAG", list.toString() );
+
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(),
+                        new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+                                startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+                                try {
+                                    Log.d("CompletedTag", response.getJSONObject().getString("id"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+//                                try {
+//                                    Bitmap bitmap = getFacebookProfilePicture(response.getJSONObject().getString("id"));
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+                                // Application code
+//                                try {
+//                                    email = object.getString("email");
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,email,gender,birthday");
+                request.setParameters(parameters);
+                request.executeAsync();
+
+                Profile profile = Profile.getCurrentProfile();
+                Log.d("FBTAG", String.valueOf(parameters));
+
+
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -64,6 +151,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         };
+
 
         mGoogleBtn = (SignInButton) findViewById(R.id.googleBtn);
 
@@ -93,12 +181,25 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
+
     }
+
+//    public static Bitmap getFacebookProfilePicture(String userID){
+//        URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=large");
+//        Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+//
+//        return bitmap;
+//    }
 
     @Override
     protected void onStart() {
         super.onStart();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
         mAuth.addAuthStateListener(mAuthListener);
 
     }
@@ -111,6 +212,8 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
 
         //Result returned from launching the Intent from GoogleSingInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -124,6 +227,9 @@ public class LoginActivity extends AppCompatActivity {
                 Log.w(TAG, "Google sign in failed", e);
                 // ...
             }
+        }else {
+            startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+
         }
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -151,8 +257,34 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+    private void handleFacebookAccessToken(AccessToken token) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
+    }
     public void updateUI(FirebaseUser user){
         System.out.println("FFFFFFFFFFFFFFFFFFYUUUUUUUUUUUUUUUUUUUCK");
     }
+
 
 }
