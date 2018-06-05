@@ -2,6 +2,8 @@ package com.example.user.ourapp.loginIn;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -46,6 +48,10 @@ import com.facebook.appevents.AppEventsLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     private SignInButton mGoogleBtn;
@@ -69,11 +75,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+//        list.add("sss");
+
+         Log.d("FBTAG", list.toString() );
+
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("email");
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
             @Override
             public void onSuccess(LoginResult loginResult) {
                 GraphRequest request = GraphRequest.newMeRequest(
@@ -81,8 +94,20 @@ public class LoginActivity extends AppCompatActivity {
                         new GraphRequest.GraphJSONObjectCallback() {
                             @Override
                             public void onCompleted(JSONObject object, GraphResponse response) {
-                                Log.d("FBTAG", response.toString());
+                                startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+                                try {
+                                    Log.d("CompletedTag", response.getJSONObject().getString("id"));
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
+
+
+//                                try {
+//                                    Bitmap bitmap = getFacebookProfilePicture(response.getJSONObject().getString("id"));
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
                                 // Application code
 //                                try {
 //                                    email = object.getString("email");
@@ -97,7 +122,9 @@ public class LoginActivity extends AppCompatActivity {
                 request.executeAsync();
 
                 Profile profile = Profile.getCurrentProfile();
-//                displayMessage(profile);
+                Log.d("FBTAG", String.valueOf(parameters));
+
+
             }
 
             @Override
@@ -160,6 +187,13 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+//    public static Bitmap getFacebookProfilePicture(String userID){
+//        URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=large");
+//        Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+//
+//        return bitmap;
+//    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -177,8 +211,9 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
 
         //Result returned from launching the Intent from GoogleSingInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -192,6 +227,9 @@ public class LoginActivity extends AppCompatActivity {
                 Log.w(TAG, "Google sign in failed", e);
                 // ...
             }
+        }else {
+            startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+
         }
     }
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
