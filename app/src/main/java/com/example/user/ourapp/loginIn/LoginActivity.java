@@ -142,7 +142,15 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (firebaseAuth.getCurrentUser() != null) {
 
-                    startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+                    Log.d("blabla",String.valueOf(firebaseAuth.getCurrentUser().getDisplayName()));
+                    Log.d("blabla",String.valueOf(firebaseAuth.getCurrentUser().getPhotoUrl()));
+
+
+
+                    Intent intent = new Intent(LoginActivity.this, Main2Activity_Drawer.class);
+                    intent.putExtra("name", firebaseAuth.getCurrentUser().getDisplayName());
+                    intent.putExtra("icon", String.valueOf(firebaseAuth.getCurrentUser().getPhotoUrl()));
+                    startActivity(intent);
 
                 }
 
@@ -226,7 +234,7 @@ public class LoginActivity extends AppCompatActivity {
                 // ...
             }
         }else {
-            startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
+//            startActivity(new Intent(LoginActivity.this, Main2Activity_Drawer.class));
 
         }
 
@@ -268,8 +276,11 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Log.d(TAG, user.getDisplayName());
+                            Log.d("userdata", String.valueOf(user));
                             updateUI(user);
+
+
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
