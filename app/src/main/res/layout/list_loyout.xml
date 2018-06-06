@@ -27,6 +27,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/imageView"
                 android:text="Planet"
+                android:text="@string/planet"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#200043" />
 

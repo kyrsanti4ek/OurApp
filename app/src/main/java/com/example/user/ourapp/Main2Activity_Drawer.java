@@ -43,11 +43,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "myLogs";
@@ -66,6 +61,15 @@ public class Main2Activity_Drawer extends AppCompatActivity
         setContentView(R.layout.activity_main2__drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        navigationView = (NavigationView) findViewById(R.id.nav_view);
+//
+//        imageView = (ImageView) navigationView.findViewById(R.id.iconAcc);
+//        name = (TextView) navigationView.findViewById(R.id.nameAcc);
+
+//        linearLayout = (LinearLayout) findViewById(R.layout.nav_header_main2_activity__drawer);
+//        imageView = (ImageView) linearLayout.findViewById(R.id.iconAcc);
+//        name = (TextView) linearLayout.findViewById(R.id.nameAcc);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -108,6 +112,11 @@ public class Main2Activity_Drawer extends AppCompatActivity
                     .into(imageView);
     }
 
+
+
+
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -148,6 +157,9 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         if (id == R.id.g_map) {
 
+
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
+            // Handle the camera action
         } else if (id == R.id.nav_camera) {
 
 

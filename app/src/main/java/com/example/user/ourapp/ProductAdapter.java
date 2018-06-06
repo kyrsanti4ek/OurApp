@@ -14,6 +14,9 @@ import java.util.List;
 * RecyclerView.Adapter
 * RecyclerView.ViewHolder
 **/
+ * RecyclerView.Adapter
+ * RecyclerView.ViewHolder
+ **/
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
     private Context mCtx;
