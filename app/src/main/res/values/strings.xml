@@ -11,5 +11,6 @@
     <string name="fb_login_protocol_scheme">fb1014980432004606</string>
     <string name="project">Project</string>
     <string name="issues">Issues</string>
+    <string name="planet">Planet</string>
 
 </resources>
