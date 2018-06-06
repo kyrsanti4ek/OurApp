@@ -46,6 +46,8 @@ import org.w3c.dom.Text;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "myLogs";
@@ -53,7 +55,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private ImageView imageView;
+    private CircleImageView imageView;
     private TextView name;
     private LinearLayout linearLayout;
     private NavigationView navigationView;
@@ -92,7 +94,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         View headerView = navigationView.getHeaderView(0);
         name = (TextView) headerView.findViewById(R.id.nameAcc);
-        imageView = (ImageView) headerView.findViewById(R.id.iconAcc);
+        imageView = (CircleImageView) headerView.findViewById(R.id.iconAcc);
 
         String personName = getIntent().getExtras().getString("name");
 
