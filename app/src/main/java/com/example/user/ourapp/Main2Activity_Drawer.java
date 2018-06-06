@@ -28,6 +28,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
+import com.example.user.ourapp.projIss.ItemFragment;
+import com.example.user.ourapp.projIss.dummy.DummyContent;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -49,7 +51,7 @@ import java.net.URL;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Main2Activity_Drawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ItemFragment.OnListFragmentInteractionListener {
     private static final String TAG = "myLogs";
 
     private FirebaseAuth mAuth;
@@ -158,7 +160,9 @@ public class Main2Activity_Drawer extends AppCompatActivity
         } else if (id == R.id.nav_quotes) {
 
         } else if (id == R.id.nav_project) {
+
         } else if (id == R.id.nav_issues) {
+
         } else if (id == R.id.nav_log_out) {
 
             mAuth.signOut();
@@ -177,5 +181,10 @@ public class Main2Activity_Drawer extends AppCompatActivity
         super.onStart();
 
         mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+
     }
 }
