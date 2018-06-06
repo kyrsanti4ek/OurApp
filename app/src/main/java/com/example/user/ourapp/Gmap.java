@@ -79,3 +79,10 @@ public class Gmap extends FragmentActivity implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
+
+//public static Gmap newInstance(String param1, String param2) {
+//        Gmap fragment = new Gmap();
+//        Bundle args = new Bundle();
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
