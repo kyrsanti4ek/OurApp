@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -21,12 +22,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.SignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -37,8 +50,8 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
     private ImageView imageView;
     private TextView name;
+    private LinearLayout linearLayout;
     private NavigationView navigationView;
-//    private C navHeader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,21 +65,9 @@ public class Main2Activity_Drawer extends AppCompatActivity
 //        imageView = (ImageView) navigationView.findViewById(R.id.iconAcc);
 //        name = (TextView) navigationView.findViewById(R.id.nameAcc);
 
-
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-            Log.d(TAG, "name: " + personName + "; surname: " + personFamilyName + "; icon: " + personPhoto);
-
-//            imageView.setImageURI(personPhoto);
-//            name.setText(personName);
-        }
-
+//        linearLayout = (LinearLayout) findViewById(R.layout.nav_header_main2_activity__drawer);
+//        imageView = (ImageView) linearLayout.findViewById(R.id.iconAcc);
+//        name = (TextView) linearLayout.findViewById(R.id.nameAcc);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -90,8 +91,36 @@ public class Main2Activity_Drawer extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        name = (TextView) headerView.findViewById(R.id.nameAcc);
+        imageView = (ImageView) headerView.findViewById(R.id.iconAcc);
+
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+//            String personGivenName = acct.getGivenName();
+//            String personFamilyName = acct.getFamilyName();
+//            String personEmail = acct.getEmail();
+//            String personId = acct.getId();
+            Uri personPhoto = acct.getPhotoUrl();
+            Log.d(TAG, "name: " + personName + "; icon: " + personPhoto);
+
+//            imageView.setImageURI(personPhoto);
+            name.setText(personName);
+            Picasso.get()
+                    .load(personPhoto)
+                    .resize(200, 200)
+                    .centerCrop()
+                    .into(imageView);
+        }
+
+
+
+
     }
 
     @Override
@@ -134,11 +163,12 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         if (id == R.id.g_map) {
             // Handle the camera action
-            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
-
         } else if (id == R.id.nav_camera) {
 
+
         } else if (id == R.id.nav_slideshow) {
+
+
 
         } else if (id == R.id.nav_quotes) {
 
@@ -146,6 +176,8 @@ public class Main2Activity_Drawer extends AppCompatActivity
         } else if (id == R.id.nav_log_out) {
 
             mAuth.signOut();
+
+            LoginManager.getInstance().logOut();
 
         }
 
