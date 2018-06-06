@@ -2,6 +2,8 @@ package com.example.user.ourapp;
 
 import android.content.ContentProvider;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -41,6 +43,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "myLogs";
@@ -48,7 +55,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    private ImageView imageView;
+    private CircleImageView imageView;
     private TextView name;
     private LinearLayout linearLayout;
     private NavigationView navigationView;
@@ -59,15 +66,6 @@ public class Main2Activity_Drawer extends AppCompatActivity
         setContentView(R.layout.activity_main2__drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        navigationView = (NavigationView) findViewById(R.id.nav_view);
-//
-//        imageView = (ImageView) navigationView.findViewById(R.id.iconAcc);
-//        name = (TextView) navigationView.findViewById(R.id.nameAcc);
-
-//        linearLayout = (LinearLayout) findViewById(R.layout.nav_header_main2_activity__drawer);
-//        imageView = (ImageView) linearLayout.findViewById(R.id.iconAcc);
-//        name = (TextView) linearLayout.findViewById(R.id.nameAcc);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -96,31 +94,18 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         View headerView = navigationView.getHeaderView(0);
         name = (TextView) headerView.findViewById(R.id.nameAcc);
-        imageView = (ImageView) headerView.findViewById(R.id.iconAcc);
+        imageView = (CircleImageView) headerView.findViewById(R.id.iconAcc);
 
+        String personName = getIntent().getExtras().getString("name");
 
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        if (acct != null) {
-            String personName = acct.getDisplayName();
-//            String personGivenName = acct.getGivenName();
-//            String personFamilyName = acct.getFamilyName();
-//            String personEmail = acct.getEmail();
-//            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-            Log.d(TAG, "name: " + personName + "; icon: " + personPhoto);
-
-//            imageView.setImageURI(personPhoto);
-            name.setText(personName);
+        String personPhoto = getIntent().getExtras().getString("icon");
+        Log.d("PersonPhotoString",personPhoto);
+        name.setText(personName);
             Picasso.get()
-                    .load(personPhoto)
+                    .load(Uri.parse(personPhoto))
                     .resize(200, 200)
                     .centerCrop()
                     .into(imageView);
-        }
-
-
-
-
     }
 
     @Override
@@ -162,7 +147,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.g_map) {
-            // Handle the camera action
+
         } else if (id == R.id.nav_camera) {
 
 
@@ -172,7 +157,8 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         } else if (id == R.id.nav_quotes) {
 
-
+        } else if (id == R.id.nav_project) {
+        } else if (id == R.id.nav_issues) {
         } else if (id == R.id.nav_log_out) {
 
             mAuth.signOut();
