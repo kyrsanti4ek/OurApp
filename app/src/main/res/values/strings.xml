@@ -12,5 +12,7 @@
     <string name="project">Project</string>
     <string name="issues">Issues</string>
     <string name="planet">Planet</string>
+    <string name="title_activity_photo_description">PhotoDescriptionActivity</string>
+    <string name="nameof">←NameOf</string>
 
 </resources>

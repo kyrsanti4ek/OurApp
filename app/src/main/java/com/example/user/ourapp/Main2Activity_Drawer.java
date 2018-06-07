@@ -46,6 +46,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, ItemFragment.OnListFragmentInteractionListener {
     private static final String TAG = "myLogs";
@@ -117,9 +119,6 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
 
 
-
-    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -161,10 +160,10 @@ public class Main2Activity_Drawer extends AppCompatActivity
         if (id == R.id.g_map) {
 
 
-            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
             // Handle the camera action
         } else if (id == R.id.nav_camera) {
 
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
 
         } else if (id == R.id.nav_slideshow) {
 

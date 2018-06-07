@@ -42,11 +42,14 @@ public class FragmenPhoto extends android.app.Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_fragmen_photo, container, false);
 
+
+
+
+
         productList = new ArrayList<>();
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
-
 
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -116,9 +119,6 @@ public class FragmenPhoto extends android.app.Fragment {
 
         adapter = new ProductAdapter(getActivity().getApplicationContext(), productList);
         recyclerView.setAdapter(adapter);
-
-
-
 
 
 
