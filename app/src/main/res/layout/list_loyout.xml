@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/clickLay"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
@@ -26,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/imageView"
-                android:text="@string/planet"
+                android:text="Planet"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="#200043" />
 
