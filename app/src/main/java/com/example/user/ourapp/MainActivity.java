@@ -15,11 +15,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2__drawer);
 
         btnActTwo = (Button) findViewById(R.id.button);
         btnActTwo.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
