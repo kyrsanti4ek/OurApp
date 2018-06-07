@@ -18,6 +18,7 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_description);
 
+
 //        clickText = (TextView) findViewById(R.id.textViewTitle);
 //        clickText.setOnClickListener(this);
 //
