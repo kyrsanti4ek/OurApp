@@ -129,6 +129,27 @@ public class Main2Activity_Drawer extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+//    public void displaySelectedScreen(int itemId) {
+//        //creating fragment object
+//        Fragment fragment = null;
+//
+//        //initializing the fragment object which is selected
+//        switch (itemId) {
+//            case R.id.g_map:
+//                fragment = new Fragment();
+//                break;
+//        }
+//
+//        //replacing the fragment
+//        if (fragment != null) {
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_view, fragment);
+//            ft.commit();
+//        }
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -136,7 +157,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.g_map) {
-/
+
 //            FragmentManager fm = getFragmentManager();
 //            FragmentTransaction ft = fm.beginTransaction();
 //            ft.replace(R.id.nav_view, new Gmap());
