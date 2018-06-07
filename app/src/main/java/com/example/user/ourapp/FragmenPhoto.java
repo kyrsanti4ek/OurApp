@@ -57,8 +57,8 @@ public class FragmenPhoto extends android.app.Fragment {
         productList.add(
                 new Product(
                         1,
-                        "Create Code",
-                        "100 kg",
+                        "RecyclerView",
+                        "Прокручивается список, создаются вьюхи и выводятся на экран, при этом выполняется onCreateViewHolder() и onBindViewHolder().",
                         5,
                         1000,
                         R.drawable.macbook));
@@ -66,8 +66,8 @@ public class FragmenPhoto extends android.app.Fragment {
         productList.add(
                 new Product(
                         1,
-                        "Study the Code",
-                        "700 hours",
+                        "Fragment",
+                        "Сами фрагменты наследуются от android.app.Fragment. Существует подклассы фрагментов: ListFragment, DialogFragment, PreferenceFragment, WebViewFragment и др.",
                         5,
                         700,
                         R.drawable.dellinspiron));
@@ -75,8 +75,8 @@ public class FragmenPhoto extends android.app.Fragment {
         productList.add(
                 new Product(
                         1,
-                        "Global Code",
-                        "All",
+                        "Adapter",
+                        "В Android часто используются адаптеры. Если говорить в общих чертах, то адаптеры упрощают связывание данных с элементом управления. Адаптеры используются при работе с виджетами, которые дополняют android.widget.AdapterView: ListView, ExpandableListView, GridView, Spinner, Gallery, а также в активности ListActivity и др. Сам AdapterView дополняет android.widget.ViewGroup.",
                         5,
                         00000,
                         R.drawable.surface));
@@ -84,8 +84,8 @@ public class FragmenPhoto extends android.app.Fragment {
         productList.add(
                 new Product(
                         1,
-                        "Server",
-                        "WWW",
+                        "CardView",
+                        "Новый компонент CardView появился в Android Lollipop (API 21), но благодаря библиотеке совместимости доступен и для старых устройств. По сути является дальнейшим развитием FrameLayout и позволяет создавать красивую карточку с тенью и закруглёнными углами, который служит контейнером для других компонентов.",
                         5,
                         100000,
                         R.drawable.serv));
@@ -93,8 +93,8 @@ public class FragmenPhoto extends android.app.Fragment {
         productList.add(
                 new Product(
                         1,
-                        "Contact with the code",
-                        "Always",
+                        "ViewPager",
+                        "ViewPager позволяет нам организовать удобный и красивый просмотр данных с возможностью перелистывания влево-вправо. Сам ViewPager отвечает за показ и прокрутку. Но ему нужен еще PagerAdapter, который отвечает за предоставление данных. PagerAdapter – это базовый абстрактный класс, для которого разработчик дописывает реализацию так, как ему надо. Существует распространенная стандартная (частичная) реализация PagerAdapter, которая работает с фрагментами – это FragmentPagerAdapter. Разработчику остается только создать фрагмент и определить кол-во страниц.",
                         5,
                         00000,
                         R.drawable.kiborg));
@@ -102,8 +102,10 @@ public class FragmenPhoto extends android.app.Fragment {
         productList.add(
                 new Product(
                         1,
-                        "Internet",
-                        "All",
+                        "Activity",
+                        "активная (active или running) — активность находится на переднем плане экрана. Пользователь может взаимодействовать с активным окном;\n" +
+                                "приостановленная (paused) — активность потеряла фокус, но все еще видима пользователю. То есть активность находится сверху и частично перекрывает данную активность. Приостановленная активность может быть уничтожена системой в критических ситуациях при нехватке памяти;\n" +
+                                "остановленная (stopped) — если данная активность полностью закрыта другой активностью. Она больше не видима пользователю и может быть уничтожена системой, если память необходима для более важного процесса.",
                         5,
                         00000,
                         R.drawable.planet));
@@ -111,8 +113,8 @@ public class FragmenPhoto extends android.app.Fragment {
         productList.add(
                 new Product(
                         1,
-                        "Generate",
-                        "Always",
+                        "View",
+                        "Все элементы интерфейса пользователя в приложении Android создаются с помощью объектов View и ViewGroup. Объект View формирует на экране элемент, с которым пользователь может взаимодействовать. Объект ViewGroup содержит другие объекты View (и ViewGroup) для определения макета интерфейса. Android предоставляет коллекцию подклассов View и ViewGroup, которая включает в себя обычные элементы ввода (такие как кнопки и текстовые поля) и различные модели макет (такие как линейный или относительный макет).",
                         5,
                         00000,
                         R.drawable.generate));

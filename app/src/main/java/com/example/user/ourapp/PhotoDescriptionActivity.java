@@ -9,36 +9,51 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PhotoDescriptionActivity extends AppCompatActivity {
+public class PhotoDescriptionActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView clickText;
+    TextView textView;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_description);
 
-//        clickText = (TextView) findViewById(R.id.textViewTitle);
-//        clickText.setOnClickListener(this);
-//
-//    }
-//
-//    @Override
-//    public void onClick(View v) {
+        clickText = (TextView) findViewById(R.id.nameOf);
+        clickText.setOnClickListener(this);
+
+        textView = (TextView) findViewById(R.id.textView);
+        textView.setText(getIntent().getStringExtra("description"));
+
+        ImageView imv = findViewById(R.id.circle_profile);
+        TextView tvw = findViewById(R.id.textView);
+
+        Bitmap bitmap = BitmapFactory.decodeByteArray(
+                getIntent().getByteArrayExtra("Image"), 0, getIntent().getByteArrayExtra("Image").length);
+        imv.setImageBitmap(bitmap);
+
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
 //        switch (v.getId()) {
-//            case R.id.textViewTitle:
-//                Intent intent = new Intent(this, PhotoDescriptionActivity.class);
+//            case R.id.nameOf:
+//                Intent intent = new Intent(this, Product.class);
 //                startActivity(intent);
 //                break;
 //            default:
 //                break;
 //        }
-//    }
-//}
-        ImageView imv = findViewById(R.id.circle_profile);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(
-                getIntent().getByteArrayExtra("Image"), 0, getIntent().getByteArrayExtra("Image").length);
-        imv.setImageBitmap(bitmap);
+
+
+
+
     }
 }
 
