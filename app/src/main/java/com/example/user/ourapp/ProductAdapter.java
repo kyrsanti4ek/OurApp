@@ -40,8 +40,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(final ProductViewHolder holder, int position) {
-        Product product = productList.get(position);
+        final Product product = productList.get(position);
         holder.textViewTitle.setText(product.getTitle());
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,16 +55,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs);
 
                 intent.putExtra("Image", bs.toByteArray());
+                intent.putExtra("description", product.getShortdesc());
                 // add new extras
                 mCtx.startActivity(intent);
             }
         });
-//        holder.textViewDesc.setText(product.getShortdesc());
-//        holder.textViewRating.setText(String.valueOf(product.getRating()));
-//        holder.textViewPrice.setText(String.valueOf(product.getPrice()));
+//      holder.textViewDesc.setText(product.getShortdesc());
+        holder.textViewRating.setText(String.valueOf(product.getRating()));
+        holder.textViewPrice.setText(String.valueOf(product.getPrice()));
 
         holder.imageView.setImageDrawable(mCtx.getResources().getDrawable(product.getImage()));
-
     }
 
     @Override
@@ -82,9 +83,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             linearLayout = itemView.findViewById(R.id.clickLay);
             imageView = itemView.findViewById(R.id.imageView);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
-//            textViewDesc = itemView.findViewById(R.id.textViewShortDesc);
-//            textViewRating = itemView.findViewById(R.id.textViewRating);
-//            textViewPrice = itemView.findViewById(R.id.textViewPrice);
+//          textViewDesc = itemView.findViewById(R.id.textViewShortDesc);
+            textViewRating = itemView.findViewById(R.id.textViewRating);
+            textViewPrice = itemView.findViewById(R.id.textViewPrice);
         }
     }
 }
