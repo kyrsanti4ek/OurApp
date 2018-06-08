@@ -13,6 +13,6 @@
     <string name="issues">Issues</string>
     <string name="planet">Planet</string>
     <string name="title_activity_photo_description">PhotoDescriptionActivity</string>
-    <string name="nameof">←NameOf</string>
-
+    <string name="back">Back</string>
+    <string name="colorPhotoDesc">Desk</string>
 </resources>

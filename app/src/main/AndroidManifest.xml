@@ -42,10 +42,10 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-        <activity android:name=".PhotoDescriptionActivity">
+        <activity android:name=".PhotoDescriptionActivity"
+                  android:label="Back"
+            android:theme="@style/AppTheme" />
 
-
-        </activity>
     </application>
 
 </manifest>

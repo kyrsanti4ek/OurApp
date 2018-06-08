@@ -11,9 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PhotoDescriptionActivity extends AppCompatActivity implements View.OnClickListener {
-
-    TextView clickText;
+public class PhotoDescriptionActivity extends AppCompatActivity {
+    
     TextView textView;
 
     @Override
@@ -21,12 +20,8 @@ public class PhotoDescriptionActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_description);
 
-//    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        clickText = (TextView) findViewById(R.id.nameOf);
-        clickText.setOnClickListener(this);
-
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         textView = (TextView) findViewById(R.id.textView);
         textView.setText(getIntent().getStringExtra("description"));
 
@@ -39,9 +34,11 @@ public class PhotoDescriptionActivity extends AppCompatActivity implements View.
     }
 
     @Override
-    public void onClick(View v) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         finish();
+        return true;
     }
+
 }
 
 
