@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
+import com.example.user.ourapp.projIss.IssuesFragment;
 import com.example.user.ourapp.projIss.ProjectFragment;
 import com.example.user.ourapp.projIss.Project;
 import com.facebook.login.LoginManager;
@@ -162,6 +163,8 @@ public class Main2Activity_Drawer extends AppCompatActivity
             getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new ProjectFragment()).commit();
 
         } else if (id == R.id.nav_issues) {
+
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new IssuesFragment("BugFinders")).commit();
 
         } else if (id == R.id.nav_log_out) {
 

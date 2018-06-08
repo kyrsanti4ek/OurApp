@@ -1,5 +1,8 @@
 package com.example.user.ourapp.projIss;
 
+import android.content.ClipData;
+import android.graphics.drawable.shapes.Shape;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +21,7 @@ public class Project {
     public Project(int id, String title) {
         this.id = id;
         this.title = title;
+
     }
 
     public int getId() {

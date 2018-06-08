@@ -63,7 +63,7 @@ public class ProjectFragment extends android.app.Fragment {
         projectList.add(new Project(3, "ListBoxer"));
         projectList.add(new Project(4, "OurApp"));
 
-        adapter = new ProjectRecyclerViewAdapter(getActivity().getApplicationContext(), projectList);
+        adapter = new ProjectRecyclerViewAdapter(getActivity().getApplicationContext(), projectList, getFragmentManager());
         recyclerView.setAdapter(adapter);
 
         return view;
