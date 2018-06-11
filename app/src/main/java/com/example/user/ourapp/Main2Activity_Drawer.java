@@ -26,6 +26,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,7 +38,7 @@ import com.example.user.ourapp.loginIn.LoginActivity;
 import com.example.user.ourapp.projIss.IssuesFragment;
 import com.example.user.ourapp.projIss.PieGraph;
 import com.example.user.ourapp.projIss.ProjectFragment;
-import com.example.user.ourapp.projIss.Project;
+import com.example.user.ourapp.weather.MainFragment;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.SignInAccount;
@@ -55,6 +56,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     private static final String TAG = "myLogs";
 
     private FirebaseAuth mAuth;
@@ -102,15 +104,15 @@ public class Main2Activity_Drawer extends AppCompatActivity
         imageView = (CircleImageView) headerView.findViewById(R.id.iconAcc);
 
         String personName = getIntent().getExtras().getString("name");
-
+        Log.e("onCreate", "yes");
         String personPhoto = getIntent().getExtras().getString("icon");
-        Log.d("PersonPhotoString",personPhoto);
+        Log.d("PersonPhotoString", personPhoto);
         name.setText(personName);
-            Picasso.get()
-                    .load(Uri.parse(personPhoto))
-                    .resize(200, 200)
-                    .centerCrop()
-                    .into(imageView);
+        Picasso.get()
+                .load(Uri.parse(personPhoto))
+                .resize(200, 200)
+                .centerCrop()
+                .into(imageView);
     }
 
     @Override
@@ -127,6 +129,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main2_activity__drawer, menu);
+        Log.e("onCreateOptionsMenu", "yes");
         return true;
     }
 
@@ -136,36 +139,23 @@ public class Main2Activity_Drawer extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Log.e("onOptionsItemSelected", "yes");
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Log.e("action_settings", "yes");
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-//    public void displaySelectedScreen(int itemId) {
-//        //creating fragment object
-//        Fragment fragment = null;
-//
-//        //initializing the fragment object which is selected
-//        switch (itemId) {
-//            case R.id.g_map:
-//                fragment = new Fragment();
-//                break;
-//        }
-//
-//        //replacing the fragment
-//        if (fragment != null) {
-//            FragmentTransaction ft = getFragmentManager().beginTransaction();
-//            ft.replace(R.id.nav_view, fragment);
-//            ft.commit();
-//        }
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//    }
-
+    public void showFragment(android.support.v4.app.Fragment fragment) {
+        if (fragment != null) {
+            android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_cont, fragment);
+            ft.commit();
+        }
+    }
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -182,7 +172,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         } else if (id == R.id.nav_slideshow) {
 
-
+            showFragment(new MainFragment());
 
         } else if (id == R.id.nav_quotes) {
 
@@ -208,6 +198,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        //displaySelectedScreen(item.getItemId());
         return true;
     }
 

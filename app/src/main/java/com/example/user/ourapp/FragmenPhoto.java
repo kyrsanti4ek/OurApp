@@ -1,7 +1,5 @@
 package com.example.user.ourapp;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,10 +10,9 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.zip.Inflater;
 
 
-public class FragmenPhoto extends android.app.Fragment {
+public class FragmenPhoto extends Fragment {
 
     RecyclerView recyclerView;
 
@@ -37,9 +34,9 @@ public class FragmenPhoto extends android.app.Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View rootView = inflater.inflate(R.layout.fragment_fragmen_photo, container, false);
 
 
