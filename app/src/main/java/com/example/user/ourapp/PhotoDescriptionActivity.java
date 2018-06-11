@@ -36,17 +36,11 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
         view = (ImageView) findViewById(R.id.view);
 
 
-
         Bitmap bitmap = BitmapFactory.decodeByteArray(
                 getIntent().getByteArrayExtra("Image"), 0, getIntent().getByteArrayExtra("Image").length);
         imv.setImageBitmap(bitmap);
 
         view.setImageBitmap(bitmap);
-
-
-
-
-
 
     }
 
