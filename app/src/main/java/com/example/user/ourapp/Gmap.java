@@ -35,6 +35,7 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
 
 
     public Gmap() {
+
     }
 
     @Override

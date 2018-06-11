@@ -64,6 +64,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
+
                 if (firebaseAuth.getCurrentUser() == null) {
 
                     startActivity(new Intent(Main2Activity_Drawer.this, LoginActivity.class));
