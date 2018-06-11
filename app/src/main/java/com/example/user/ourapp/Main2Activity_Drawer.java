@@ -48,9 +48,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
-        showFragment(new Gmap());
+        showFragment(new Gmap()); //запуск GMAP по умолчанию
 
 
 //        navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -137,6 +135,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     private void displaySelectedScreen(int itemId) {
