@@ -1,7 +1,9 @@
 package com.example.user.ourapp.projIss;
 
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +24,7 @@ public class ProjectFragment extends android.app.Fragment {
     private int mColumnCount = 1;
 //    private OnListFragmentInteractionListener mListener;
 
+    Preferences data;
     RecyclerView recyclerView;
     List<Project> projectList;
     ProjectRecyclerViewAdapter adapter;
@@ -43,6 +46,8 @@ public class ProjectFragment extends android.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        getActivity().getActionBar().setTitle("PROJECT");
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -51,24 +56,38 @@ public class ProjectFragment extends android.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        data = new Preferences(getContext());
+
+        projectList = data.getProjectData();
+
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-        projectList = new ArrayList<>();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_item_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        projectList.add(new Project(1, "Simple Project"));
-        projectList.add(new Project(2, "BugFinders"));
-        projectList.add(new Project(3, "ListBoxer"));
-        projectList.add(new Project(4, "OurApp"));
-
         adapter = new ProjectRecyclerViewAdapter(getActivity().getApplicationContext(), projectList, getFragmentManager());
         recyclerView.setAdapter(adapter);
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.project_floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmAddIssues();
+                adapter.dataSetChanged(data.getProjectData());
+                recyclerView.scrollTo(100, 100);
+            }
+        });
 
         return view;
     }
 
+    public void confirmAddIssues() {
+        DialogFragment newFragment = new AddProjectDialogFragment(adapter);
+        Bundle bundle = new Bundle();
+        newFragment.setArguments(bundle);
+        newFragment.show(getFragmentManager(), "addProject");
+    }
 
 //    @Override
 //    public void onAttach(Context context) {

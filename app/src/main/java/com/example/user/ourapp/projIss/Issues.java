@@ -10,15 +10,25 @@ public class Issues {
     private String description;
     private String status;
 
-    public Issues(String project, int id, String summary, String priority, String severity, String description, String status) {
+    public Issues(String project,  String summary, String priority, String severity, String description, String status) {
         this.project = project;
-        this.id = id;
         this.summary = summary;
         this.priority = priority;
         this.severity = severity;
         this.description = description;
         this.status = status;
     }
+
+    public Issues(int id, String project,  String summary, String priority, String severity, String description, String status) {
+        this.id = id;
+        this.project = project;
+        this.summary = summary;
+        this.priority = priority;
+        this.severity = severity;
+        this.description = description;
+        this.status = status;
+    }
+
 
     public String getProject() {
         return project;

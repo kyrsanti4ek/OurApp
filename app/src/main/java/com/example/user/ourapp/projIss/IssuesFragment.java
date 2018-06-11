@@ -1,7 +1,10 @@
 package com.example.user.ourapp.projIss;
 
 import android.annotation.SuppressLint;
+import android.app.DialogFragment;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,11 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ValidFragment")
-public class IssuesFragment extends android.app.Fragment {
+public class IssuesFragment extends android.app.Fragment{
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
 //    private OnListFragmentInteractionListener mListener;
 
+    Preferences data;
     RecyclerView recyclerView;
     List<Issues> issuesList;
     IssuesRecyclerViewAdapter adapter;
@@ -34,6 +38,8 @@ public class IssuesFragment extends android.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        getActivity().getActionBar().setTitle("ISSUES");
+
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
@@ -42,42 +48,41 @@ public class IssuesFragment extends android.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        data = new Preferences(getContext());
 
+        issuesList = data.getIssuesData();
         View view = inflater.inflate(R.layout.issues_fragment_item_list, container, false);
-        issuesList = new ArrayList<>();
+
 
         issuesProjectName = (TextView) view.findViewById(R.id.issues_project_name);
         issuesProjectName.setText(projectName);
 
-                recyclerView = (RecyclerView) view.findViewById(R.id.issues_fragment_item_list);
+        recyclerView = (RecyclerView) view.findViewById(R.id.issues_fragment_item_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        issuesList.add(new Issues("Simple Project", 1, "Summary Simple Project", "high", "Critical", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("Simple Project", 2, "Summary Simple Project", "high", "Blocker", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "Open"));
-        issuesList.add(new Issues("Simple Project", 3, "Summary Simple Project", "high", "Critical", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "Close"));
-        issuesList.add(new Issues("Simple Project", 4, "Summary Simple Project", "high", "Minor", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("Simple Project", 5, "Summary Simple Project", "high", "Major", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("BugFinders", 1, "Summary BugFinders", "high", "Critical", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("BugFinders", 2, "Summary BugFinders", "high", "Trivial", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("BugFinders", 3, "Summary BugFinders", "high", "Blocker", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("BugFinders", 4, "Summary BugFinders", "high", "Minor", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("BugFinders", 5, "Summary BugFinders", "high", "Major", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("ListBoxer", 1, "Summary ListBoxer", "high", "Minor", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("ListBoxer", 2, "Summary ListBoxer", "high", "Blocker", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("ListBoxer", 3, "Summary ListBoxer", "high", "Trivial", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("ListBoxer", 4, "Summary ListBoxer", "high", "Minor", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("ListBoxer", 5, "Summary ListBoxer", "high", "Critical", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("OurApp", 1, "Summary OurApp", "high", "Minor", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("OurApp", 2, "Summary OurApp", "high", "Trivial", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("OurApp", 3, "Summary OurApp", "high", "Trivial", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("OurApp", 4, "Summary OurApp", "high", "Major", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-        issuesList.add(new Issues("OurApp", 5, "Summary OurApp", "high", "Major", "qwpuihqr qpiud qwidqhw qwihdq wqiwhdquiwh qwh diqwh dowiquhw  dhwqupwdh whqsdlksa w dqhjwd ", "inProgress"));
-
-        adapter = new IssuesRecyclerViewAdapter(getActivity().getApplicationContext(), issuesList, projectName);
+        adapter = new IssuesRecyclerViewAdapter(getActivity().getApplicationContext(), issuesList, projectName, getFragmentManager());
         recyclerView.setAdapter(adapter);
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                confirmAddIssues();
+                adapter.dataSetChanged(data.getIssuesData());
+                recyclerView.scrollTo(100, 100);
+            }
+        });
+
         return view;
+    }
+
+    public void confirmAddIssues() {
+        DialogFragment newFragment = new AddIssuesDialogFragment(adapter);
+        Bundle bundle = new Bundle();
+        bundle.putString("projectName", projectName);
+        newFragment.setArguments(bundle);
+        newFragment.show(getFragmentManager(), "addIssues");
     }
 
 //    private void fragmentJump(Project mItemSelected) {

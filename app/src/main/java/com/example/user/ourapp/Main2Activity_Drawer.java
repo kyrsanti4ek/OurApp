@@ -35,6 +35,7 @@ import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
 import com.example.user.ourapp.projIss.IssuesFragment;
+import com.example.user.ourapp.projIss.PieGraph;
 import com.example.user.ourapp.projIss.ProjectFragment;
 import com.example.user.ourapp.projIss.Project;
 import com.facebook.login.LoginManager;
@@ -144,6 +145,27 @@ public class Main2Activity_Drawer extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+//    public void displaySelectedScreen(int itemId) {
+//        //creating fragment object
+//        Fragment fragment = null;
+//
+//        //initializing the fragment object which is selected
+//        switch (itemId) {
+//            case R.id.g_map:
+//                fragment = new Fragment();
+//                break;
+//        }
+//
+//        //replacing the fragment
+//        if (fragment != null) {
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_view, fragment);
+//            ft.commit();
+//        }
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -171,6 +193,10 @@ public class Main2Activity_Drawer extends AppCompatActivity
         } else if (id == R.id.nav_issues) {
 
             getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new IssuesFragment("BugFinders")).commit();
+
+        } else if (id == R.id.nav_pie_graph) {
+
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new PieGraph()).commit();
 
         } else if (id == R.id.nav_log_out) {
 

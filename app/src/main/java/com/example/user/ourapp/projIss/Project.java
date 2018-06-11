@@ -18,8 +18,7 @@ public class Project {
     private int id;
     private String title;
 
-    public Project(int id, String title) {
-        this.id = id;
+    public Project(String title) {
         this.title = title;
 
     }

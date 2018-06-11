@@ -36,6 +36,10 @@
             android:id="@+id/nav_issues"
             android:title="@string/issues"
             />
+        <item
+            android:id="@+id/nav_pie_graph"
+            android:title="@string/statistic"
+            />
     </group>
 
     <item android:title="">
