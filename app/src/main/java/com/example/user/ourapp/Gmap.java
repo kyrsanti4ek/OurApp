@@ -1,13 +1,19 @@
 package com.example.user.ourapp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -33,9 +39,17 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
     MapView mMapView;
     View mView;
 
+    private static final int MY_PERMISSION_REQUEST_CODE = 11;
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 10;
+    private Location mLastLocation;
+
+    double latitude, longitude;
+
+    private GoogleApiClient mGoogleApiClient;
+    private LocationRequest mLoctionRequest;
+
 
     public Gmap() {
-
     }
 
     @Override
@@ -43,15 +57,16 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_gmap, container, false);
         return mView;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         mMapView = (MapView) mView.findViewById(R.id.map);
@@ -60,7 +75,9 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
             mMapView.onResume();
             mMapView.getMapAsync(this);
         }
+
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -69,13 +86,11 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
 
         mGoogleMap = googleMap;
 
-
         try {
             // Customise the styling of the base map using a JSON object defined
             // in a raw resource file.
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.mapstyle));
-
             if (!success) {
                 Log.e("Gmap", "Style parsing failed.");
             }
@@ -83,12 +98,32 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
             Log.e("Gmap", "Can't find style. Error: ", e);
         }
 
+        //current place
+        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSION_REQUEST_CODE);
+            }
+            return;
+        }
+        else {
+            googleMap.setMyLocationEnabled(true);
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(50.45, 30.50)).title("Kyiv"));
-        CameraPosition Kyiv = CameraPosition.builder().target(new LatLng(50.45, 30.50)).zoom(10).build();
-        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Kyiv));
+            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+
+            googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("My current location"));
+            CameraPosition cur = CameraPosition.builder().target(new LatLng(0, 0)).zoom(10).build();
+            googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cur));
+
+        }
+
+
+
+        //Marker in Kyiv
+//        googleMap.addMarker(new MarkerOptions().position(new LatLng(50.45, 30.50)).title("Kyiv"));
+//        CameraPosition Kyiv = CameraPosition.builder().target(new LatLng(50.45, 30.50)).zoom(10).build();
+//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Kyiv));
 
     }
 }
