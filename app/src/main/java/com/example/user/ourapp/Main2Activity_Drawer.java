@@ -50,7 +50,6 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         showFragment(new Gmap()); //запуск GMAP по умолчанию
 
-
 //        navigationView = (NavigationView) findViewById(R.id.nav_view);
 //
 //        imageView = (ImageView) navigationView.findViewById(R.id.iconAcc);
