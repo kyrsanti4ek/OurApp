@@ -56,6 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
                 intent.putExtra("Image", bs.toByteArray());
                 intent.putExtra("description", product.getShortdesc());
+                intent.putExtra("title", product.getTitle());
                 // add new extras
                 mCtx.startActivity(intent);
             }
