@@ -30,4 +30,5 @@
     <string name="projects">Projects</string>
     <string name="project_name">Project name</string>
     <string name="statistic">Statistic</string>
+    <string name="severity_statistics">Severity Statistics</string>
 </resources>

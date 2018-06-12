@@ -4,28 +4,6 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/g_map"
-            android:icon="@drawable/ic_location_on_black_24dp"
-            android:title="G map" />
-
-       <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Photo" />
-
-
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_public_black_24dp"
-            android:title="Currency/Weather/Bitcoin" />
-
-
-
-        <item
-            android:id="@+id/nav_quotes"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Quotes" />
 
         <item
             android:id="@+id/nav_project"

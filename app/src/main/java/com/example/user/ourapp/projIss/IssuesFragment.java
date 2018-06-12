@@ -12,15 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.user.ourapp.ChangeEvent;
 import com.example.user.ourapp.R;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressLint("ValidFragment")
-public class IssuesFragment extends android.app.Fragment{
+public class IssuesFragment extends android.app.Fragment {
     private static final String ARG_COLUMN_COUNT = "column-count";
     private int mColumnCount = 1;
+    private EventBus bus = EventBus.getDefault();
 //    private OnListFragmentInteractionListener mListener;
 
     Preferences data;
@@ -28,10 +34,12 @@ public class IssuesFragment extends android.app.Fragment{
     List<Issues> issuesList;
     IssuesRecyclerViewAdapter adapter;
     String projectName;
+    public static String projectNameAll;
     TextView issuesProjectName;
 
     public IssuesFragment(String projectName) {
         this.projectName = projectName;
+        projectNameAll = projectName;
     }
 
     @Override
@@ -43,6 +51,8 @@ public class IssuesFragment extends android.app.Fragment{
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -121,6 +131,11 @@ public class IssuesFragment extends android.app.Fragment{
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(ChangeEvent event) {
+        if (event.isNeedToBeChanged()) {
+            adapter.dataSetChanged(data.getIssuesData());
+        }
+    }
 }
 

@@ -33,12 +33,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
 import com.example.user.ourapp.projIss.IssuesFragment;
 import com.example.user.ourapp.projIss.PieGraph;
 import com.example.user.ourapp.projIss.ProjectFragment;
-import com.example.user.ourapp.weather.MainFragment;
+//import com.example.user.ourapp.weather.MainFragment;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.SignInAccount;
@@ -53,6 +54,8 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.user.ourapp.projIss.IssuesFragment.projectNameAll;
 
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,6 +76,8 @@ public class Main2Activity_Drawer extends AppCompatActivity
         setContentView(R.layout.activity_main2__drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new ProjectFragment()).commit();
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -162,27 +167,17 @@ public class Main2Activity_Drawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.g_map) {
-
-
-
-        } else if (id == R.id.nav_camera) {
-
-            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
-
-        } else if (id == R.id.nav_slideshow) {
-
-            showFragment(new MainFragment());
-
-        } else if (id == R.id.nav_quotes) {
-
-        } else if (id == R.id.nav_project) {
+        if (id == R.id.nav_project) {
 
             getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new ProjectFragment()).commit();
 
         } else if (id == R.id.nav_issues) {
 
-            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new IssuesFragment("BugFinders")).commit();
+            if (projectNameAll != null) {
+                getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new IssuesFragment(projectNameAll)).commit();
+            } else {
+                Toast.makeText(this, "Sorri, you don't have any Project", Toast.LENGTH_LONG).show();
+            }
 
         } else if (id == R.id.nav_pie_graph) {
 

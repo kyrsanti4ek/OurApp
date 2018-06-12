@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmenPhoto extends Fragment {
+public class FragmenPhoto extends android.app.Fragment {
 
     RecyclerView recyclerView;
 

@@ -16,7 +16,10 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.example.user.ourapp.ChangeEvent;
 import com.example.user.ourapp.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 @SuppressLint("ValidFragment")
 public class ChangeIssuesDialogFragment extends DialogFragment {
@@ -162,6 +165,7 @@ public class ChangeIssuesDialogFragment extends DialogFragment {
                 Preferences data = new Preferences(getContext());
                 data.changeIssues(iId, sProject, sSummary, sPriority, sSeverity, sDescription, sStatus);
                 Log.d("issuesData", data.getIssuesData().toString());
+                EventBus.getDefault().post(new ChangeEvent(true));
                 dismiss();
             }
         });
