@@ -27,11 +27,15 @@ import com.google.android.gms.maps.model.MarkerOptions;
 // * Use the {@link Gmap#newInstance} factory method to
 // * create an instance of this fragment.
 // */
-public class Gmap extends Fragment implements OnMapReadyCallback {
+
+
+public class Gmap extends Fragment implements /*GoogleMap.OnMyLocationButtonClickListener,
+        GoogleMap.OnMyLocationClickListener,*/ OnMapReadyCallback {
 
     GoogleMap mGoogleMap;
     MapView mMapView;
     View mView;
+
 
     public Gmap() {
     }
@@ -59,7 +63,6 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
             mMapView.onResume();
             mMapView.getMapAsync(this);
         }
-
     }
 
 
@@ -69,10 +72,17 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
         MapsInitializer.initialize(getContext());
 
         mGoogleMap = googleMap;
+//        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+//                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//            return;}
+//
+//        mGoogleMap.setMyLocationEnabled(true);
+//        mGoogleMap.setOnMyLocationButtonClickListener(this);
+//        mGoogleMap.setOnMyLocationClickListener(this);
+
 
         try {
-            // Customise the styling of the base map using a JSON object defined
-            // in a raw resource file.
+            // set the map style
             boolean success = googleMap.setMapStyle(
                     MapStyleOptions.loadRawResourceStyle(getContext(), R.raw.mapstyle));
             if (!success) {
@@ -83,7 +93,6 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
         }
 
 
-//
 //        //current place
 //        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -95,21 +104,38 @@ public class Gmap extends Fragment implements OnMapReadyCallback {
 //        }
 //        else {
 //            googleMap.setMyLocationEnabled(true);
+//              }
 
-        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        // Sets the map types
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_NONE);
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+//        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         googleMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("My current location"));
         CameraPosition cur = CameraPosition.builder().target(new LatLng(0, 0)).zoom(2).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cur));
-
     }
 
+//    @Override
+//    public void onMyLocationClick(@NonNull Location location) {
+//        Toast.makeText(getContext(), "Current location:\n" + location, Toast.LENGTH_LONG).show();
+//    }
+//
+//    @Override
+//    public boolean onMyLocationButtonClick() {
+//        Toast.makeText(getContext(), "MyLocation button clicked", Toast.LENGTH_SHORT).show();
+//        // Return false so that we don't consume the event and the default behavior still occurs
+//        // (the camera animates to the user's current position).
+//        return false;
+//    }
 }
 
         //Marker in Kyiv
 //        googleMap.addMarker(new MarkerOptions().position(new LatLng(50.45, 30.50)).title("Kyiv"));
-//        CameraPosition Kyiv = CameraPosition.builder().target(new LatLng(50.45, 30.50)).zoom(10).build();
-//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(Kyiv));
+//        CameraPosition kyiv = CameraPosition.builder().target(new LatLng(50.45, 30.50)).zoom(10).build();
+//        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(kyiv));
 
 
 
