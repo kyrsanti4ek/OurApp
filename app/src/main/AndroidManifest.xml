@@ -44,7 +44,7 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".PhotoDescriptionActivity"
-                  android:label="Back"
+
             android:theme="@style/CustomTheme" />
 
 

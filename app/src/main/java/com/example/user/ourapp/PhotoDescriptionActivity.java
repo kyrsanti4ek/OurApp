@@ -3,6 +3,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class PhotoDescriptionActivity extends AppCompatActivity {
 
@@ -39,7 +42,6 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(
                 getIntent().getByteArrayExtra("Image"), 0, getIntent().getByteArrayExtra("Image").length);
         imv.setImageBitmap(bitmap);
-
         view.setImageBitmap(bitmap);
 
     }
