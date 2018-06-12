@@ -77,6 +77,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new ProjectFragment()).commit();
 
         mAuth = FirebaseAuth.getInstance();
