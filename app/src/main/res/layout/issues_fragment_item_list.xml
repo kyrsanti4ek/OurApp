@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -14,30 +14,29 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/issues_project_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/projects"
+            android:layout_height="30dp"
             android:textAlignment="center"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="6dp" />
-            />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/fragment_item_list"
-            android:name="com.example.user.ourapp.projIss.ItemFragment"
+            android:id="@+id/issues_fragment_item_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="wrap_content"
             app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            tools:context=".projIss.ProjectFragment"
-            tools:listitem="@layout/fragment_item" />
+            tools:context=".projIss.IssuesFragment"
+            tools:listitem="@layout/issues_fragment_item">
+
+        </android.support.v7.widget.RecyclerView>
+
 
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/project_floatingActionButton"
+        android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

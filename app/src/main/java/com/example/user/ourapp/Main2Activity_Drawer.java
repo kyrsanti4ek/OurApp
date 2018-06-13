@@ -5,6 +5,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.ContentProvider;
+import android.content.Intent;
+import android.net.Uri;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -28,11 +34,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
-import com.example.user.ourapp.projIss.ItemFragment;
-import com.example.user.ourapp.projIss.dummy.DummyContent;
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
+import com.example.user.ourapp.projIss.IssuesFragment;
+import com.example.user.ourapp.projIss.PieGraph;
+import com.example.user.ourapp.projIss.ProjectFragment;
+import com.example.user.ourapp.projIss.Project;
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.SignInAccount;
@@ -49,7 +54,7 @@ import org.w3c.dom.Text;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Main2Activity_Drawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ItemFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "myLogs";
 
     private FirebaseAuth mAuth;
@@ -66,15 +71,6 @@ public class Main2Activity_Drawer extends AppCompatActivity
         setContentView(R.layout.activity_main2__drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        navigationView = (NavigationView) findViewById(R.id.nav_view);
-//
-//        imageView = (ImageView) navigationView.findViewById(R.id.iconAcc);
-//        name = (TextView) navigationView.findViewById(R.id.nameAcc);
-
-//        linearLayout = (LinearLayout) findViewById(R.layout.nav_header_main2_activity__drawer);
-//        imageView = (ImageView) linearLayout.findViewById(R.id.iconAcc);
-//        name = (TextView) linearLayout.findViewById(R.id.nameAcc);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -117,8 +113,6 @@ public class Main2Activity_Drawer extends AppCompatActivity
                     .into(imageView);
     }
 
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -151,6 +145,27 @@ public class Main2Activity_Drawer extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+//    public void displaySelectedScreen(int itemId) {
+//        //creating fragment object
+//        Fragment fragment = null;
+//
+//        //initializing the fragment object which is selected
+//        switch (itemId) {
+//            case R.id.g_map:
+//                fragment = new Fragment();
+//                break;
+//        }
+//
+//        //replacing the fragment
+//        if (fragment != null) {
+//            FragmentTransaction ft = getFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_view, fragment);
+//            ft.commit();
+//        }
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -160,7 +175,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         if (id == R.id.g_map) {
 
 
-            // Handle the camera action
+
         } else if (id == R.id.nav_camera) {
 
             getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
@@ -173,7 +188,15 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         } else if (id == R.id.nav_project) {
 
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new ProjectFragment()).commit();
+
         } else if (id == R.id.nav_issues) {
+
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new IssuesFragment("BugFinders")).commit();
+
+        } else if (id == R.id.nav_pie_graph) {
+
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new PieGraph()).commit();
 
         } else if (id == R.id.nav_log_out) {
 
@@ -195,8 +218,4 @@ public class Main2Activity_Drawer extends AppCompatActivity
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
 }

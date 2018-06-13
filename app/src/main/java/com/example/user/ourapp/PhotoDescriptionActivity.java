@@ -1,5 +1,7 @@
 package com.example.user.ourapp;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
@@ -21,6 +23,11 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
     ImageView imv, view;
 
 
+    public static SQLiteOpenHelper sqLiteOpenHelper;
+
+
+    DBHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +40,6 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
         textView.setText(getIntent().getStringExtra("description"));
         getSupportActionBar().setTitle(getIntent().getStringExtra("title"));
 
-
         imv = findViewById(R.id.circle_profile);
         TextView tvw = findViewById(R.id.textView);
         view = (ImageView) findViewById(R.id.view);
@@ -44,7 +50,16 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
         imv.setImageBitmap(bitmap);
         view.setImageBitmap(bitmap);
 
+
     }
+
+//    private void init() {
+//        imv = findViewById(R.id.circle_profile);
+//        TextView tvw = findViewById(R.id.textView);
+//        view = (ImageView) findViewById(R.id.view);
+//    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
