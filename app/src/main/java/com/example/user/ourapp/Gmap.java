@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -40,10 +41,13 @@ public class Gmap extends Fragment implements GoogleMap.OnMyLocationButtonClickL
     GoogleMap mGoogleMap;
     MapView mMapView;
     View mView;
+    ImageButton button;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
 
     }
 
@@ -52,6 +56,15 @@ public class Gmap extends Fragment implements GoogleMap.OnMyLocationButtonClickL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_gmap, container, false);
+
+        button = (ImageButton) mView.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMapTypeSelectorDialog();
+            }
+        });
+
         return mView;
     }
 
@@ -82,11 +95,8 @@ public class Gmap extends Fragment implements GoogleMap.OnMyLocationButtonClickL
     }
 
 
-
-
-
     private static final CharSequence[] MAP_TYPE_ITEMS =
-            {"Satellite", "Terrain", "Hybrid", "Normal"};
+            {"Normal", "Terrain", "Hybrid", "Satellite"};
 
     private void showMapTypeSelectorDialog() {
         // Prepare the dialog by setting up a Builder.
@@ -105,6 +115,8 @@ public class Gmap extends Fragment implements GoogleMap.OnMyLocationButtonClickL
 
                     public void onClick(DialogInterface dialog, int item) {
                         // Locally create a finalised object.
+
+
 
                         // Perform an action depending on which item was selected.
                         switch (item) {
@@ -183,10 +195,11 @@ public class Gmap extends Fragment implements GoogleMap.OnMyLocationButtonClickL
 //        googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
    //     googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(50.45, 30.5)).title("My current location"));
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(50.45, 30.50)).title("My current location"));
         //CameraPosition cur = CameraPosition.builder().target(new LatLng(0, 0)).zoom(2).build();
         //googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cur));
     }
+
 }
 
 
