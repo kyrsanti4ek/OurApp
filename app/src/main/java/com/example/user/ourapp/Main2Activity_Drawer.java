@@ -175,13 +175,13 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
             showFragment(new MainFragment());
 
-        } else if (id == R.id.nav_quotes) {
-
-        } else if (id == R.id.nav_project) {
-
-            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new ProjectFragment()).commit();
-
-        } else if (id == R.id.nav_issues) {
+//        } else if (id == R.id.nav_quotes) {
+//
+//        } else if (id == R.id.nav_project) {
+//
+//            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new ProjectFragment()).commit();
+//
+//        } else if (id == R.id.nav_issues) {
 
         } else if (id == R.id.nav_log_out) {
 
