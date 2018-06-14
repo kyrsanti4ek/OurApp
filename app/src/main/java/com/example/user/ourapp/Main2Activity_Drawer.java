@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -21,16 +23,17 @@ import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
 import com.example.user.ourapp.projIss.ProjectFragment;
+import com.example.user.ourapp.projIss.Project;
 import com.example.user.ourapp.weather.MainFragment;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Main2Activity_Drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     private static final String TAG = "myLogs";
 
     private FirebaseAuth mAuth;
@@ -48,8 +51,16 @@ public class Main2Activity_Drawer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        showFragment(new Gmap());  //nadja gmap
+        showFragment(new Gmap()); //запуск GMAP по умолчанию
 
+//        navigationView = (NavigationView) findViewById(R.id.nav_view);
+//
+//        imageView = (ImageView) navigationView.findViewById(R.id.iconAcc);
+//        name = (TextView) navigationView.findViewById(R.id.nameAcc);
+
+//        linearLayout = (LinearLayout) findViewById(R.layout.nav_header_main2_activity__drawer);
+//        imageView = (ImageView) linearLayout.findViewById(R.id.iconAcc);
+//        name = (TextView) linearLayout.findViewById(R.id.nameAcc);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -66,6 +77,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         };
 
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -74,9 +86,6 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-/*        navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);*/
 
         View headerView = navigationView.getHeaderView(0);
         name = (TextView) headerView.findViewById(R.id.nameAcc);
@@ -126,6 +135,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+
     }
 
     private void displaySelectedScreen(int itemId) {
@@ -163,8 +173,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.g_map) {
-
-            showFragment(new Gmap()); //nadja gmap
+            showFragment(new Gmap());
 
         } else if (id == R.id.nav_camera) {
 
@@ -174,6 +183,8 @@ public class Main2Activity_Drawer extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
             showFragment(new MainFragment());
+
+
 
 //        } else if (id == R.id.nav_quotes) {
 //
@@ -193,13 +204,13 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        //displaySelectedScreen(item.getItemId());
         return true;
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
         mAuth.addAuthStateListener(mAuthListener);
     }
 

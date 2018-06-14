@@ -46,6 +46,7 @@ public class FragmentOne extends Fragment {
         pressure_field = (TextView)rootView.findViewById(R.id.pressure_field);
         weatherIcon = (TextView)rootView.findViewById(R.id.weather_icon);
 
+
         cityField.setTypeface(weatherFont);
         updatedField.setTypeface(weatherFont);
         detailsField.setTypeface(weatherFont);

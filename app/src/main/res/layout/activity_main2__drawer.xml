@@ -18,6 +18,10 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".Main2Activity_Drawer"/>
 
+        tools:context=".Main2Activity_Drawer"/>
+
+
+
 
 
     <android.support.design.widget.NavigationView
@@ -28,6 +32,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main2_activity__drawer"
         app:menu="@menu/activity_main2__drawer_drawer" />
-
 
 </android.support.v4.widget.DrawerLayout>
