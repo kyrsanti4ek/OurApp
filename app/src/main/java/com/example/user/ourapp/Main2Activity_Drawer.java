@@ -48,7 +48,7 @@ import org.w3c.dom.Text;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Main2Activity_Drawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ItemFragment.OnListFragmentInteractionListener {
+        implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = "myLogs";
 
     private FirebaseAuth mAuth;

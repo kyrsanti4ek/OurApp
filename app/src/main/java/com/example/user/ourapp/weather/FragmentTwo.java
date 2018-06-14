@@ -74,7 +74,7 @@ public class FragmentTwo extends Fragment {
 
                         DownloadXML downloadXML = new DownloadXML(URL);
                         downloadXML.start();
-                        downloadXML.onPreExecute();
+
 
                     }
                 }, 3000);
@@ -83,10 +83,10 @@ public class FragmentTwo extends Fragment {
 
         DownloadXML downloadXML = new DownloadXML(URL);
         downloadXML.start();
-        downloadXML.onPreExecute();
 
 
-        //return inflater.inflate(R.layout.fragment_two, container, false);
+
+
         return rootView;
     }
 
@@ -95,14 +95,6 @@ public class FragmentTwo extends Fragment {
 
         String urlStr;
 
-        protected void onPreExecute() {
-
-            pDialog = new ProgressDialog(getContext());
-            pDialog.setTitle("Загрузка курсов");
-            pDialog.setMessage("Загрузка...");
-            pDialog.setIndeterminate(false);
-            pDialog.show();
-        }
 
         public DownloadXML(String urlStr) {
             this.urlStr = urlStr;
@@ -171,13 +163,12 @@ public class FragmentTwo extends Fragment {
 
                                     + "\n" + "\n"
 
-//                            +" Курс покупки: "+vv.getNamedItem("buy").getNodeValue()
-//                            +" Курс продажи: "+vv.getNamedItem("sale").getNodeValue()
+
                     );
                 }
 
             }
-            pDialog.dismiss();
+
 
 
         }
