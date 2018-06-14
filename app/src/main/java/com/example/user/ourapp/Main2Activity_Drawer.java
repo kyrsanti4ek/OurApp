@@ -183,8 +183,8 @@ public class Main2Activity_Drawer extends AppCompatActivity
             case R.id.nav_slideshow:
                 fragment = new MainFragment();
                 break;
-            case R.id.nav_camera:
-                showFragment(new FragmenPhoto());
+//            case R.id.nav_camera:
+//                showFragment(new FragmenPhoto());
         }
 
         //replacing the fragment
@@ -198,6 +198,12 @@ public class Main2Activity_Drawer extends AppCompatActivity
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_cont, fragment);
             ft.commit();
+        }
+    }
+
+    public void showFragmentSA(android.app.Fragment fragment) {
+        if (fragment != null) {
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, fragment).commit();
         }
     }
 
@@ -216,7 +222,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         } else if (id == R.id.nav_camera) {
 
-            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
+            showFragment(new FragmenPhoto());
 
         } else if (id == R.id.nav_slideshow) {
 

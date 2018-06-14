@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmenPhoto extends android.app.Fragment {
+public class FragmenPhoto extends Fragment {
 
     RecyclerView recyclerView;
 
@@ -43,7 +43,7 @@ public class FragmenPhoto extends android.app.Fragment {
         recyclerView.setHasFixedSize(true);
 
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getBaseContext()));
 
         productList.add(
                 new Product(
@@ -110,7 +110,7 @@ public class FragmenPhoto extends android.app.Fragment {
                         1000000,
                         R.drawable.generate));
 
-        adapter = new ProductAdapter(getActivity().getApplicationContext(), productList);
+        adapter = new ProductAdapter(getActivity(), productList);
         recyclerView.setAdapter(adapter);
 
         return rootView;
