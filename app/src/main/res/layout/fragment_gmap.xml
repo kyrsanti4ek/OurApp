@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Gmap">
+    tools:context=".Gmap"
+    tools:menu="@drawable/ic_menu_manage">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map"
@@ -16,6 +17,22 @@
         map:uiScrollGestures="true"
         map:uiTiltGestures="true"
         map:uiZoomControls="true"
-        map:uiZoomGestures="true"/>
+        map:uiZoomGestures="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/button"
+            android:layout_width="38dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="92dp"
+            android:layout_marginEnd="12dp"
+            android:adjustViewBounds="false"
+            android:src="@drawable/ic_public_black_24dp" />
+    </RelativeLayout>
 
 </FrameLayout>
