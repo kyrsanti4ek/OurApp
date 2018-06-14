@@ -1,5 +1,7 @@
 package com.example.user.ourapp;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
@@ -21,18 +23,17 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
 
     TextView textView;
     ImageView imv, view;
-
-
-    public static SQLiteOpenHelper sqLiteOpenHelper;
-
-
+     //
     DBHelper dbHelper;
+     //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_description);
-
+     //
+        dbHelper = new DBHelper(this);
+     //
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -51,6 +52,7 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
         view.setImageBitmap(bitmap);
 
 
+
     }
 
 //    private void init() {
@@ -58,7 +60,6 @@ public class PhotoDescriptionActivity extends AppCompatActivity {
 //        TextView tvw = findViewById(R.id.textView);
 //        view = (ImageView) findViewById(R.id.view);
 //    }
-
 
 
     @Override

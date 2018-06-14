@@ -23,6 +23,11 @@ public class FragmenPhoto extends android.app.Fragment {
 
     ProductAdapter adapter;
 
+    DBHelper dbHelper;
+
+
+
+
     public FragmenPhoto() {
         // Required empty public constructor
     }
@@ -45,8 +50,9 @@ public class FragmenPhoto extends android.app.Fragment {
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
 
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
 
         productList.add(
                 new Product(

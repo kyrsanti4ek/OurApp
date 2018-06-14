@@ -26,9 +26,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private Context mCtx;
     private List<Product> productList;
 
+    DBHelper dbHelper;
+
+
     public ProductAdapter(Context mCtx, List<Product> productList) {
         this.mCtx = mCtx;
         this.productList = productList;
+
+
     }
 
     @Override
@@ -36,6 +41,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         LayoutInflater inflater = LayoutInflater.from(mCtx);
         View view = inflater.inflate(R.layout.list_loyout, null);
         return new ProductViewHolder(view);
+
+
     }
 
     @Override
@@ -43,9 +50,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         final Product product = productList.get(position);
         holder.textViewTitle.setText(product.getTitle());
 
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(mCtx, PhotoDescriptionActivity.class);
 
                 Drawable drawable = holder.imageView.getDrawable();
@@ -77,6 +86,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         LinearLayout linearLayout;
         ImageView imageView;
         TextView textViewTitle, textViewDesc, textViewRating, textViewPrice;
+
 
         public ProductViewHolder(View itemView) {
             super(itemView);
