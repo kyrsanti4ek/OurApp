@@ -13,9 +13,26 @@
     <string name="issues">Issues</string>
     <string name="planet">Planet</string>
     <string name="title_activity_photo_description">PhotoDescriptionActivity</string>
+    <string name="back">Back</string>
+    <string name="textview">TextView</string>
+    <string name="todo">TODO</string>
     <string name="nameof">←NameOf</string>
+    <string name="status">Status:</string>
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_new">Add New</string>
+    <string name="create_new_issues">Create new Issues</string>
+    <string name="description">Description</string>
+    <string name="summary">Summary</string>
+    <string name="change">Change</string>
+    <string name="change_issues">Change Issues</string>
+    <string name="projects">Projects</string>
+    <string name="project_name">Project name</string>
+    <string name="statistic">Statistic</string>
+
 
 </resources>

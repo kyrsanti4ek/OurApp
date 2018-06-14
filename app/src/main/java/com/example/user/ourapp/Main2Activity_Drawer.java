@@ -5,6 +5,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.app.FragmentManager;
+//import android.app.FragmentTransaction;
+import android.content.ContentProvider;
+import android.content.Intent;
+import android.net.Uri;
+//import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +19,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -29,6 +36,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.user.ourapp.loginIn.LoginActivity;
+import com.example.user.ourapp.projIss.IssuesFragment;
+import com.example.user.ourapp.projIss.PieGraph;
+import com.example.user.ourapp.projIss.ProjectFragment;
+import com.example.user.ourapp.projIss.Project;
 import com.example.user.ourapp.projIss.ProjectFragment;
 import com.example.user.ourapp.projIss.Project;
 import com.example.user.ourapp.weather.MainFragment;
@@ -205,8 +216,7 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
         } else if (id == R.id.nav_camera) {
 
-            //getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
-            showFragment(new FragmenPhoto());
+            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
 
         } else if (id == R.id.nav_slideshow) {
 

@@ -2,23 +2,24 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/CustomTheme"
     android:id="@+id/description"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#aeb6b5"
     tools:context=".PhotoDescriptionActivity">
 
-
-    <View
+    <ImageView
         android:id="@+id/view"
-        android:layout_width="436dp"
-        android:layout_height="276dp"
-        android:layout_marginBottom="320dp"
-        android:background="#022aae"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="266dp"
+        android:layout_marginBottom="325dp"
+        android:contentDescription="@string/todo"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+        <!--app:layout_constraintVertical_bias="0.511" />-->
 
     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/circle_profile"
@@ -30,8 +31,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/generate"
-        app:civ_border_color="#1c8609"
-        app:civ_border_width="2dp"
+        app:civ_border_color="#021169"
+        app:civ_border_width="3dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,23 +42,21 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="216dp"
-        android:text="TextView"
+        android:layout_height="252dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="@string/textview"
+        android:theme="@style/CustomTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/circle_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/circle_profile"
+        app:layout_constraintVertical_bias="0.526" />
 
-    <TextView
-        android:id="@+id/nameOf"
-        android:layout_width="283dp"
-        android:layout_height="39dp"
-        android:text="@string/nameof"
-        android:textColor="#ffffff"
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <!--<include android:id="@+id/app_bar"-->
+        <!--layout="@layout/app_bar_main2_activity__drawer"/>-->
 
 
 </android.support.constraint.ConstraintLayout>
