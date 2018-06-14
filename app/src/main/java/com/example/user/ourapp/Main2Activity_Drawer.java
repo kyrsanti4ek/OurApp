@@ -1,9 +1,15 @@
 package com.example.user.ourapp;
 
+import android.content.ContentProvider;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,6 +24,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -26,14 +33,22 @@ import com.example.user.ourapp.projIss.ProjectFragment;
 import com.example.user.ourapp.projIss.Project;
 import com.example.user.ourapp.weather.MainFragment;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.SignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Main2Activity_Drawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ItemFragment.OnListFragmentInteractionListener {
     private static final String TAG = "myLogs";
 
     private FirebaseAuth mAuth;
@@ -50,6 +65,15 @@ public class Main2Activity_Drawer extends AppCompatActivity
         setContentView(R.layout.activity_main2__drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        navigationView = (NavigationView) findViewById(R.id.nav_view);
+//
+//        imageView = (ImageView) navigationView.findViewById(R.id.iconAcc);
+//        name = (TextView) navigationView.findViewById(R.id.nameAcc);
+
+//        linearLayout = (LinearLayout) findViewById(R.layout.nav_header_main2_activity__drawer);
+//        imageView = (ImageView) linearLayout.findViewById(R.id.iconAcc);
+//        name = (TextView) linearLayout.findViewById(R.id.nameAcc);
 
         showFragment(new Gmap()); //запуск GMAP по умолчанию
 
@@ -175,6 +199,10 @@ public class Main2Activity_Drawer extends AppCompatActivity
         if (id == R.id.g_map) {
             showFragment(new Gmap());
 
+
+
+            // Handle the camera action
+
         } else if (id == R.id.nav_camera) {
 
             //getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new FragmenPhoto()).commit();
@@ -184,15 +212,6 @@ public class Main2Activity_Drawer extends AppCompatActivity
 
             showFragment(new MainFragment());
 
-
-
-//        } else if (id == R.id.nav_quotes) {
-//
-//        } else if (id == R.id.nav_project) {
-//
-//            getFragmentManager().beginTransaction().replace(R.id.fragment_cont, new ProjectFragment()).commit();
-//
-//        } else if (id == R.id.nav_issues) {
 
         } else if (id == R.id.nav_log_out) {
 
